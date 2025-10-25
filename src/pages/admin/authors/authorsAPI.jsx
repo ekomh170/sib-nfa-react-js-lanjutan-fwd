@@ -1,9 +1,11 @@
 /**
- * authorsAPI.jsx - Author Management Page (CRUD)
+ * authorsAPI.jsx - Author Management Page (CRUD LENGKAP)
  * 
  * Halaman admin untuk manage Author dengan fitur:
- * - READ: Tampil list author dalam card grid (Name, Bio, Photo)
- * - CREATE: Form tambah author baru (Name, Bio, Photo URL)
+ * - READ: Tampil list author dalam card grid (Name, Email, Country, Birth Date, Biography)
+ * - CREATE: Form tambah author baru (5 fields)
+ * - UPDATE: Edit author dengan form lengkap (Tugas 2)
+ * - DELETE: Hapus author dengan konfirmasi dialog (Tugas 2)
  * - Loading state & error handling
  * - Success notification
  * 
@@ -20,6 +22,10 @@ export default function AuthorsAPI() {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -62,16 +68,75 @@ export default function AuthorsAPI() {
     setSuccessMessage("");
     
     try {
-      const response = await authorService.create(formData);
-      setSuccessMessage(response.message || "Penulis berhasil ditambahkan!");
+      if (isEditing) {
+        // Update existing author
+        const response = await authorService.update(editingId, formData);
+        setSuccessMessage(response.message || "Penulis berhasil diupdate!");
+      } else {
+        // Create new author
+        const response = await authorService.create(formData);
+        setSuccessMessage(response.message || "Penulis berhasil ditambahkan!");
+      }
+      
       setFormData({ name: "", email: "", country: "", birth_date: "", biography: "" });
       setShowForm(false);
+      setIsEditing(false);
+      setEditingId(null);
       // Refresh author list
       fetchAuthors();
     } catch (err) {
-      setError(err.response?.data?.message || "Gagal menambahkan penulis");
-      console.error("Error creating author:", err);
+      setError(err.response?.data?.message || `Gagal ${isEditing ? 'mengupdate' : 'menambahkan'} penulis`);
+      console.error("Error submitting author:", err);
     }
+  };
+
+  const handleEdit = (author) => {
+    setFormData({
+      name: author.name,
+      email: author.email,
+      country: author.country || "",
+      birth_date: author.birth_date || "",
+      biography: author.biography || "",
+    });
+    setEditingId(author.id);
+    setIsEditing(true);
+    setShowForm(true);
+    setError(null);
+    setSuccessMessage("");
+  };
+
+  const handleCancelEdit = () => {
+    setFormData({ name: "", email: "", country: "", birth_date: "", biography: "" });
+    setIsEditing(false);
+    setEditingId(null);
+    setShowForm(false);
+    setError(null);
+  };
+
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      setError(null);
+      const response = await authorService.delete(deleteId);
+      setSuccessMessage(response.message || "Penulis berhasil dihapus!");
+      setShowDeleteModal(false);
+      setDeleteId(null);
+      // Refresh author list
+      fetchAuthors();
+    } catch (err) {
+      setError(err.response?.data?.message || "Gagal menghapus penulis");
+      console.error("Error deleting author:", err);
+      setShowDeleteModal(false);
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+    setDeleteId(null);
   };
 
   return (
@@ -88,7 +153,14 @@ export default function AuthorsAPI() {
       {/* Tombol Tambah Penulis */}
       <div className="mb-6">
         <button
-          onClick={() => setShowForm(!showForm)}
+          onClick={() => {
+            if (showForm && !isEditing) {
+              setShowForm(false);
+            } else {
+              handleCancelEdit();
+              setShowForm(!showForm);
+            }
+          }}
           className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-bold rounded-lg text-sm px-5 py-2.5 shadow-lg transition"
         >
           {showForm ? "❌ Batal" : "➕ Tambah Penulis"}
@@ -113,7 +185,7 @@ export default function AuthorsAPI() {
       {showForm && (
         <div className="mb-6 p-6 bg-white border border-gray-200 rounded-lg shadow">
           <h2 className="text-xl font-bold mb-4 text-gray-900">
-            Tambah Penulis Baru
+            {isEditing ? "Edit Penulis" : "Tambah Penulis Baru"}
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="grid gap-4 mb-4 sm:grid-cols-2">
@@ -212,7 +284,7 @@ export default function AuthorsAPI() {
               type="submit"
               className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
-              Simpan Penulis
+              {isEditing ? "💾 Update Penulis" : "➕ Simpan Penulis"}
             </button>
           </form>
         </div>
@@ -265,10 +337,16 @@ export default function AuthorsAPI() {
                 {author.biography || "Belum ada biografi"}
               </p>
               <div className="flex gap-2">
-                <button className="text-xs font-medium text-red-600 hover:underline">
-                  📝 Edit
+                <button 
+                  onClick={() => handleEdit(author)}
+                  className="text-xs font-medium text-blue-600 hover:underline"
+                >
+                  ✏️ Edit
                 </button>
-                <button className="text-xs font-medium text-red-600 hover:underline">
+                <button 
+                  onClick={() => handleDeleteClick(author.id)}
+                  className="text-xs font-medium text-red-600 hover:underline"
+                >
                   🗑️ Hapus
                 </button>
               </div>
@@ -283,6 +361,34 @@ export default function AuthorsAPI() {
           <strong>📊 Total Penulis:</strong> {authors.length} penulis terdaftar
         </p>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
+          <div className="relative p-8 bg-white w-96 shadow-lg rounded-lg">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">
+              🗑️ Konfirmasi Hapus
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Apakah Anda yakin ingin menghapus penulis ini? Data yang sudah dihapus tidak dapat dikembalikan.
+            </p>
+            <div className="flex gap-4 justify-end">
+              <button
+                onClick={handleDeleteCancel}
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 font-medium"
+              >
+                Batal
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium"
+              >
+                Ya, Hapus
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

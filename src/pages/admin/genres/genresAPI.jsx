@@ -1,9 +1,11 @@
 /**
- * genresAPI.jsx - Genre Management Page (CRUD)
+ * genresAPI.jsx - Genre Management Page (CRUD LENGKAP)
  * 
  * Halaman admin untuk manage Genre dengan fitur:
  * - READ: Tampil list genre dalam tabel (ID, Name, Slug, Description)
  * - CREATE: Form tambah genre baru (Name & Description)
+ * - UPDATE: Edit genre dengan modal form (Tugas 2)
+ * - DELETE: Hapus genre dengan konfirmasi dialog (Tugas 2)
  * - Loading state & error handling
  * - Success notification
  * 
@@ -21,6 +23,10 @@ export default function GenresAPI() {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -60,16 +66,72 @@ export default function GenresAPI() {
     setSuccessMessage("");
     
     try {
-      const response = await genreService.create(formData);
-      setSuccessMessage(response.message || "Genre berhasil ditambahkan!");
+      if (isEditing) {
+        // Update existing genre
+        const response = await genreService.update(editingId, formData);
+        setSuccessMessage(response.message || "Genre berhasil diupdate!");
+      } else {
+        // Create new genre
+        const response = await genreService.create(formData);
+        setSuccessMessage(response.message || "Genre berhasil ditambahkan!");
+      }
+      
       setFormData({ name: "", description: "" });
       setShowForm(false);
+      setIsEditing(false);
+      setEditingId(null);
       // Refresh genre list
       fetchGenres();
     } catch (err) {
-      setError(err.response?.data?.message || "Gagal menambahkan genre");
-      console.error("Error creating genre:", err);
+      setError(err.response?.data?.message || `Gagal ${isEditing ? 'mengupdate' : 'menambahkan'} genre`);
+      console.error("Error submitting genre:", err);
     }
+  };
+
+  const handleEdit = (genre) => {
+    setFormData({
+      name: genre.name,
+      description: genre.description || "",
+    });
+    setEditingId(genre.id);
+    setIsEditing(true);
+    setShowForm(true);
+    setError(null);
+    setSuccessMessage("");
+  };
+
+  const handleCancelEdit = () => {
+    setFormData({ name: "", description: "" });
+    setIsEditing(false);
+    setEditingId(null);
+    setShowForm(false);
+    setError(null);
+  };
+
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      setError(null);
+      const response = await genreService.delete(deleteId);
+      setSuccessMessage(response.message || "Genre berhasil dihapus!");
+      setShowDeleteModal(false);
+      setDeleteId(null);
+      // Refresh genre list
+      fetchGenres();
+    } catch (err) {
+      setError(err.response?.data?.message || "Gagal menghapus genre");
+      console.error("Error deleting genre:", err);
+      setShowDeleteModal(false);
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+    setDeleteId(null);
   };
 
   return (
@@ -86,7 +148,14 @@ export default function GenresAPI() {
       {/* Tombol Tambah Genre */}
       <div className="mb-6">
         <button
-          onClick={() => setShowForm(!showForm)}
+          onClick={() => {
+            if (showForm && !isEditing) {
+              setShowForm(false);
+            } else {
+              handleCancelEdit();
+              setShowForm(!showForm);
+            }
+          }}
           className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-bold rounded-lg text-sm px-5 py-2.5 shadow-lg transition"
         >
           {showForm ? "❌ Batal" : "➕ Tambah Genre"}
@@ -111,7 +180,7 @@ export default function GenresAPI() {
       {showForm && (
         <div className="mb-6 p-6 bg-white border border-gray-200 rounded-lg shadow">
           <h2 className="text-xl font-bold mb-4 text-gray-900">
-            Tambah Genre Baru
+            {isEditing ? "Edit Genre" : "Tambah Genre Baru"}
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -153,7 +222,7 @@ export default function GenresAPI() {
               type="submit"
               className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
-              Simpan Genre
+              {isEditing ? "💾 Update Genre" : "➕ Simpan Genre"}
             </button>
           </form>
         </div>
@@ -220,11 +289,17 @@ export default function GenresAPI() {
                   </td>
                   <td className="px-6 py-4">{genre.description || "-"}</td>
                   <td className="px-6 py-4">
-                    <button className="font-medium text-red-600 hover:underline mr-3">
-                      Edit
+                    <button 
+                      onClick={() => handleEdit(genre)}
+                      className="font-medium text-blue-600 hover:underline mr-3"
+                    >
+                      ✏️ Edit
                     </button>
-                    <button className="font-medium text-red-600 hover:underline">
-                      Hapus
+                    <button 
+                      onClick={() => handleDeleteClick(genre.id)}
+                      className="font-medium text-red-600 hover:underline"
+                    >
+                      🗑️ Hapus
                     </button>
                   </td>
                 </tr>
@@ -233,6 +308,34 @@ export default function GenresAPI() {
           </tbody>
         </table>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
+          <div className="relative p-8 bg-white w-96 shadow-lg rounded-lg">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">
+              🗑️ Konfirmasi Hapus
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Apakah Anda yakin ingin menghapus genre ini? Data yang sudah dihapus tidak dapat dikembalikan.
+            </p>
+            <div className="flex gap-4 justify-end">
+              <button
+                onClick={handleDeleteCancel}
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 font-medium"
+              >
+                Batal
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium"
+              >
+                Ya, Hapus
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
