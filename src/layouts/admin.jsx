@@ -7,6 +7,11 @@
  * - Main content area (dengan Outlet untuk nested routes)
  * - Tema: Merah-putih Indonesia
  * 
+ * Fitur Admin:
+ * - Genre Management: CRUD lengkap (Create, Read, Update, Delete)
+ * - Author Management: CRUD lengkap (Create, Read, Update, Delete)
+ * - Dashboard: Statistik dan overview
+ * 
  * @author Eko Muchamad Haryono - 0110223079
  */
 
