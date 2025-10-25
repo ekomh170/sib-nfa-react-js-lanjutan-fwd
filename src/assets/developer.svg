@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#DC2626"/>
+  
+  <!-- Decorative Pattern -->
+  <circle cx="50" cy="50" r="30" fill="#B91C1C" opacity="0.3"/>
+  <circle cx="350" cy="350" r="40" fill="#B91C1C" opacity="0.3"/>
+  <circle cx="350" cy="50" r="25" fill="#EF4444" opacity="0.3"/>
+  <circle cx="50" cy="350" r="35" fill="#EF4444" opacity="0.3"/>
+  
+  <!-- Person Silhouette -->
+  <g transform="translate(200, 200)">
+    <!-- Head -->
+    <circle cx="0" cy="-50" r="50" fill="#FFFFFF"/>
+    
+    <!-- Body -->
+    <ellipse cx="0" cy="40" rx="70" ry="90" fill="#FFFFFF"/>
+    
+    <!-- Shoulders -->
+    <rect x="-90" y="-10" width="180" height="60" rx="30" fill="#FFFFFF"/>
+  </g>
+  
+  <!-- Developer Badge -->
+  <g transform="translate(200, 340)">
+    <rect x="-80" y="0" width="160" height="35" rx="17.5" fill="#FFFFFF" opacity="0.9"/>
+    <text x="0" y="23" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#DC2626" text-anchor="middle">
+      Eko M. Haryono
+    </text>
+  </g>
+  
+  <!-- Code Symbols Decoration -->
+  <text x="120" y="100" font-family="monospace" font-size="20" fill="#FFFFFF" opacity="0.4">&lt;/&gt;</text>
+  <text x="260" y="120" font-family="monospace" font-size="18" fill="#FFFFFF" opacity="0.4">{ }</text>
+  <text x="100" y="300" font-family="monospace" font-size="16" fill="#FFFFFF" opacity="0.4">=&gt;</text>
+  <text x="280" y="280" font-family="monospace" font-size="20" fill="#FFFFFF" opacity="0.4">( )</text>
+</svg>
