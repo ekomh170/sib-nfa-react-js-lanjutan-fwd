@@ -27,9 +27,8 @@ Repository ini berisi tugas-tugas React JS Lanjutan yang dikerjakan selama mengi
 ### 🎯 Tugas 1: React JS Lanjutan - Pertemuan 1
 - **Branch**: `tugas1-reactjs-lanjutan-eko`
 - **GitHub Link**: [https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas1-reactjs-lanjutan-eko](https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas1-reactjs-lanjutan-eko)
-- **Backend API**: [https://github.com/ekomh170/sib-nfa-laravel-lanjutan-api](https://github.com/ekomh170/sib-nfa-laravel-lanjutan-api)
+- **Backend API**: [https://github.com/ekomh170/booksales-api-laravel](https://github.com/ekomh170/booksales-api-laravel)
 - **Status**: ✅ SUDAH SUBMIT
-- **Tanggal Submit**: Jumat, 24 Oktober 2025, 23:52 WIB
 - **Deadline**: Jumat, 24 Oktober 2025, 23:59 WIB
 - **File Submitted**: `tugas1-react-js-lanjutan-eko-muchamad-haryono-fwd-nfa.pdf`
 - **Teknologi**: React 19.1.1, Vite 7.1.7, Tailwind CSS 4.1.15, Axios, React Router v7.9.4
