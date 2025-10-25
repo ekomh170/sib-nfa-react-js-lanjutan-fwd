@@ -1,16 +1,154 @@
-# React + Vite
+# SIB Fullstack Web Developer - React JS Lanjutan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Identitas Mahasiswa
+- **NIM**: 0110223079
+- **Nama**: Eko Muchamad Haryono
+- **Program**: Studi Independen Bersertifikat
+- **Aktivitas**: SIB Fullstack Web Developer (NFA)
+- **Topik**: React JS Lanjutan
+- **Group**: 2
+- **Ruangan**: Zoom Mentoring Kelompok 02 Fullstack Web Developer - Gedung NF Academy Training Center
+- **Prodi & Peminatan**: Teknik Informatika - Software Engineering
+- **Semester**: 5
 
-Currently, two official plugins are available:
+## Deskripsi Project
+Repository ini berisi tugas-tugas React JS Lanjutan yang dikerjakan selama mengikuti program SIB (Studi Independen Bersertifikat) Fullstack Web Developer di Nurul Fikri Academy. Project ini merupakan kelanjutan dari materi React JS Dasar dengan fokus pada integrasi API dan state management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Tujuan Repository:
+- Mengumpulkan tugas React JS Lanjutan
+- Dokumentasi progress pembelajaran React JS tingkat lanjut
+- Portfolio project untuk integrasi Frontend-Backend
+- Referensi untuk pembelajaran berkelanjutan
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📚 Daftar Tugas
 
-## Expanding the ESLint configuration
+### 🎯 Tugas 1: React JS Lanjutan - Pertemuan 1
+- **Branch**: `tugas1-reactjs-lanjutan-eko`
+- **GitHub Link**: [https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas1-reactjs-lanjutan-eko](https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas1-reactjs-lanjutan-eko)
+- **Backend API**: [https://github.com/ekomh170/sib-nfa-laravel-lanjutan-api](https://github.com/ekomh170/sib-nfa-laravel-lanjutan-api)
+- **Status**: ✅ SUDAH SUBMIT
+- **Tanggal Submit**: Jumat, 24 Oktober 2025, 23:52 WIB
+- **Deadline**: Jumat, 24 Oktober 2025, 23:59 WIB
+- **File Submitted**: `tugas1-react-js-lanjutan-eko-muchamad-haryono-fwd-nfa.pdf`
+- **Teknologi**: React 19.1.1, Vite 7.1.7, Tailwind CSS 4.1.15, Axios, React Router v7.9.4
+- **Deskripsi**:
+  - Buatlah fitur **Read** dan **Create** data untuk **Genre** dan **Author** pada tampilan Admin.
+  - Desain antarmuka sesuai kreativitas masing-masing (tema: Merah-Putih Indonesia 🇮🇩).
+  - Integrasi dengan Laravel Backend API.
+  - Upload kode ke GitHub dengan repository **private** dan invite username mentor.
+  - Copy paste link GitHub ke dalam MS Word dan kumpulkan ke LMS dalam format PDF.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Fitur yang Dikerjakan:
+#### 📗 Genre Management
+- **Read**: Menampilkan daftar genre dari API dengan tabel (ID, Nama, Slug, Deskripsi)
+- **Create**: Form tambah genre baru (Nama & Deskripsi) dengan validasi
+
+#### 👤 Author Management
+- **Read**: Menampilkan daftar penulis dari API dengan card layout (Nama, Email, Negara, Tanggal Lahir, Biografi)
+- **Create**: Form tambah penulis baru dengan 5 field (Name, Email, Country, Birth Date, Biography)
+
+#### 🎨 Tema & Design
+- Tema Merah-Putih Indonesia 🇮🇩
+- Responsive design (Desktop, Tablet, Mobile)
+- Loading states & error handling
+- Success/Error notifications
+- Modern & clean UI
+
+---
+
+## 🚀 Cara Menjalankan Project
+
+### Prerequisites
+- Node.js (versi 18+)
+- npm atau yarn
+- Backend Laravel API running di `http://127.0.0.1:8000`
+
+### Instalasi
+```bash
+# Install dependencies
+npm install
+
+# Jalankan development server
+npm run dev
+```
+
+Aplikasi akan berjalan di: **http://localhost:5173**
+
+### Akses Halaman
+- Homepage: `http://localhost:5173/`
+- Admin Dashboard: `http://localhost:5173/admin`
+- Genres: `http://localhost:5173/admin/genres`
+- Authors: `http://localhost:5173/admin/authors`
+- About: `http://localhost:5173/tentang`
+
+---
+
+## 📁 Struktur Project
+
+```
+src/
+├── api/
+│   └── axios.js                   # Axios instance dengan interceptors
+├── services/
+│   ├── genreService.js            # Genre API calls
+│   └── authorService.js           # Author API calls
+├── components/
+│   ├── navbar.jsx                 # Navbar komponen
+│   ├── footer.jsx                 # Footer komponen
+│   ├── hero.jsx                   # Hero section
+│   └── testimonial.jsx            # Testimonial section
+├── layouts/
+│   ├── admin.jsx                  # Admin layout dengan sidebar
+│   └── public.jsx                 # Public layout wrapper
+├── pages/
+│   ├── admin/
+│   │   ├── index.jsx              # Dashboard admin
+│   │   ├── genres/genresAPI.jsx   # Genre CRUD (READ & CREATE)
+│   │   └── authors/authorsAPI.jsx # Author CRUD (READ & CREATE)
+│   ├── public/index.jsx           # Homepage
+│   └── about.jsx                  # About page
+├── assets/
+│   ├── logo.svg                   # BookStore logo
+│   └── developer/profile_eko.jpg  # Developer photo
+├── App.jsx                        # Router configuration
+└── main.jsx                       # Entry point
+```
+
+---
+
+## 🔌 API Integration
+
+### Base URL
+```
+http://127.0.0.1:8000/api
+```
+
+### Endpoints yang Digunakan
+
+**Genre:**
+- `GET /api/genres` - Get all genres
+- `POST /api/genres` - Create new genre
+
+**Author:**
+- `GET /api/authors` - Get all authors
+- `POST /api/authors` - Create new author
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+- **React**: 19.1.1 (Frontend Framework)
+- **Vite**: 7.1.7 (Build Tool)
+- **Tailwind CSS**: 4.1.15 (CSS Framework)
+- **React Router**: 7.9.4 (Client-side Routing)
+- **Axios**: HTTP Client untuk API Integration
+- **Laravel API**: Backend RESTful API
+
+---
+
+*Repository dibuat untuk program SIB Fullstack Web Developer (NFA) - Batch 2025*
+
+**Dikembangkan dengan ❤️ dan tema 🇮🇩 oleh Eko Muchamad Haryono**
+
