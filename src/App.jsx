@@ -1,34 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+/**
+ * App.jsx - Main Application Component
+ * 
+ * Router utama aplikasi BookStore dengan 2 layout:
+ * 1. PublicLayout - untuk halaman publik (Home, About)
+ * 2. AdminLayout - untuk halaman admin (Dashboard, Genres, Authors)
+ * 
+ * @author Eko Muchamad Haryono - 0110223079
+ */
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+// Layouts
+import PublicLayout from './layouts/public'
+import AdminLayout from './layouts/admin'
 
+// Public Pages
+import Home from './pages/public/index'
+import About from './pages/about'
+
+// Admin Pages
+import Dashboard from './pages/admin/index'
+import GenresAPI from './pages/admin/genres/genresAPI'
+import AuthorsAPI from './pages/admin/authors/authorsAPI'
+
+function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* Public Routes - Halaman yang bisa diakses semua orang */}
+        <Route path="/" element={<PublicLayout />}>
+          <Route index element={<Home />} />
+          <Route path="tentang" element={<About />} />
+        </Route>
+
+        {/* Admin Routes - Halaman untuk manajemen data */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="genres" element={<GenresAPI />} />
+          <Route path="authors" element={<AuthorsAPI />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
