@@ -47,12 +47,17 @@ export default function About() {
                         </h2>
                         <p className="text-white leading-relaxed mb-4">
                             <strong>BookStore</strong> adalah aplikasi web berbasis ReactJS yang dikembangkan untuk 
-                            memenuhi tugas <strong>ReactJS Lanjutan Pertemuan 1</strong> dengan fokus pada implementasi 
-                            CRUD (Create, Read, Update, Delete) untuk data Genre dan Author.
+                            memenuhi tugas <strong>ReactJS Lanjutan Pertemuan 1 & 2</strong> dengan fokus pada implementasi 
+                            CRUD (Create, Read, Update, Delete) <strong>lengkap</strong> untuk data Genre dan Author.
+                        </p>
+                        <p className="text-white leading-relaxed mb-4">
+                            <strong>Tugas 1 (Pertemuan 1):</strong> Implementasi fitur READ dan CREATE untuk Genre dan Author 
+                            dengan integrasi Laravel API.
                         </p>
                         <p className="text-white leading-relaxed">
-                            Aplikasi ini dibangun menggunakan teknologi modern seperti React 19, Vite, Tailwind CSS, 
-                            dan terintegrasi dengan backend Laravel API untuk manajemen data yang efisien.
+                            <strong>Tugas 2 (Pertemuan 2):</strong> Implementasi fitur UPDATE dan DELETE dengan modal edit 
+                            dan confirmation dialog. Aplikasi ini dibangun menggunakan teknologi modern seperti React 19, 
+                            Vite, Tailwind CSS, dan terintegrasi dengan backend Laravel API untuk manajemen data yang efisien.
                         </p>
                     </div>
 
@@ -68,6 +73,8 @@ export default function About() {
                                 <ul className="text-sm text-white space-y-1">
                                     <li>✓ Lihat daftar genre buku</li>
                                     <li>✓ Tambah genre baru</li>
+                                    <li>✓ Edit genre (Tugas 2)</li>
+                                    <li>✓ Hapus genre (Tugas 2)</li>
                                     <li>✓ Slug otomatis</li>
                                 </ul>
                             </div>
@@ -77,6 +84,8 @@ export default function About() {
                                 <ul className="text-sm text-white space-y-1">
                                     <li>✓ Lihat daftar penulis</li>
                                     <li>✓ Tambah penulis baru</li>
+                                    <li>✓ Edit penulis (Tugas 2)</li>
+                                    <li>✓ Hapus penulis (Tugas 2)</li>
                                     <li>✓ Data lengkap penulis</li>
                                 </ul>
                             </div>
@@ -86,6 +95,8 @@ export default function About() {
                                 <ul className="text-sm text-white space-y-1">
                                     <li>✓ Tema Merah-Putih Indonesia</li>
                                     <li>✓ Responsive Design</li>
+                                    <li>✓ Modal Edit Form</li>
+                                    <li>✓ Confirmation Dialog</li>
                                     <li>✓ User-friendly Interface</li>
                                 </ul>
                             </div>
@@ -95,7 +106,9 @@ export default function About() {
                                 <ul className="text-sm text-white space-y-1">
                                     <li>✓ Laravel Backend API</li>
                                     <li>✓ Axios HTTP Client</li>
-                                    <li>✓ RESTful Architecture</li>
+                                    <li>✓ RESTful CRUD Lengkap</li>
+                                    <li>✓ Error Handling</li>
+                                    <li>✓ Loading States</li>
                                 </ul>
                             </div>
                         </div>
@@ -180,7 +193,11 @@ export default function About() {
                                 </div>
                                 <div className="mb-4">
                                     <div className="text-sm text-red-100 mb-1">Tugas</div>
-                                    <div className="text-lg font-semibold">ReactJS Lanjutan - Pertemuan 1</div>
+                                    <div className="text-lg font-semibold">ReactJS Lanjutan - Pertemuan 1 & 2</div>
+                                    <div className="text-sm text-red-100 mt-1">
+                                        • Tugas 1: READ & CREATE<br/>
+                                        • Tugas 2: UPDATE & DELETE
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +220,7 @@ export default function About() {
                                     Frontend Repo
                                 </a>
                                 <a 
-                                    href="https://github.com/ekomh170/sib-nfa-laravel-lanjutan-api" 
+                                    href="https://github.com/ekomh170/booksales-api-laravel" 
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center px-6 py-3 bg-white text-red-700 rounded-lg font-semibold hover:bg-red-50 transition shadow-lg"
