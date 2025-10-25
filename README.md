@@ -57,6 +57,44 @@ Repository ini berisi tugas-tugas React JS Lanjutan yang dikerjakan selama mengi
 
 ---
 
+### 🎯 Tugas 2: React JS Lanjutan - Pertemuan 2
+- **Branch**: `tugas2-reactjs-lanjutan-eko`
+- **GitHub Link**: [https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas2-reactjs-lanjutan-eko](https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas2-reactjs-lanjutan-eko)
+- **Backend API**: [https://github.com/ekomh170/booksales-api-laravel](https://github.com/ekomh170/booksales-api-laravel)
+- **Status**: ✅ SUDAH SUBMIT
+- **Tanggal Submit**: Sabtu, 25 Oktober 2025, 11:39 AM
+- **Deadline**: Sabtu, 25 Oktober 2025, 23:59 WIB
+- **File Submitted**: `tugas2-react-js-lanjutan-eko-muchamad-haryono-fwd-nfa.pdf`
+- **Teknologi**: React 19.1.1, Vite 7.1.7, Tailwind CSS 4.1.15, Axios, React Router v7.9.4
+- **Deskripsi**:
+  - Buatlah fitur **Update** dan **Delete** data untuk **Genre** dan **Author** pada tampilan Admin.
+  - Desain antarmuka sesuai kreativitas masing-masing (tema: Merah-Putih Indonesia 🇮🇩).
+  - Upload kode ke GitHub dengan repository **private** dan invite username mentor.
+  - Copy paste link GitHub ke dalam MS Word dan kumpulkan ke LMS dalam format PDF.
+
+### Fitur yang Dikerjakan:
+#### 📗 Genre Management (UPDATE & DELETE)
+- **Update**: Edit data genre dengan form modal/inline editing
+- **Delete**: Hapus genre dengan konfirmasi dialog
+- Validasi form untuk update data
+- Refresh otomatis setelah update/delete
+
+#### 👤 Author Management (UPDATE & DELETE)
+- **Update**: Edit data author dengan form lengkap (Name, Email, Country, Birth Date, Biography)
+- **Delete**: Hapus author dengan konfirmasi dialog
+- Validasi form untuk update data
+- Refresh otomatis setelah update/delete
+
+#### 🎨 UI Enhancement
+- Modal/Dialog untuk form edit
+- Confirmation dialog untuk delete
+- Icon buttons untuk aksi (Edit & Delete)
+- Loading states saat proses update/delete
+- Success/Error notifications
+- Tema konsisten Merah-Putih Indonesia 🇮🇩
+
+---
+
 ## 🚀 Cara Menjalankan Project
 
 ### Prerequisites
@@ -91,8 +129,8 @@ src/
 ├── api/
 │   └── axios.js                   # Axios instance dengan interceptors
 ├── services/
-│   ├── genreService.js            # Genre API calls
-│   └── authorService.js           # Author API calls
+│   ├── genreService.js            # Genre API calls (CRUD lengkap)
+│   └── authorService.js           # Author API calls (CRUD lengkap)
 ├── components/
 │   ├── navbar.jsx                 # Navbar komponen
 │   ├── footer.jsx                 # Footer komponen
@@ -104,8 +142,8 @@ src/
 ├── pages/
 │   ├── admin/
 │   │   ├── index.jsx              # Dashboard admin
-│   │   ├── genres/genresAPI.jsx   # Genre CRUD (READ & CREATE)
-│   │   └── authors/authorsAPI.jsx # Author CRUD (READ & CREATE)
+│   │   ├── genres/genresAPI.jsx   # Genre CRUD (CREATE, READ, UPDATE, DELETE)
+│   │   └── authors/authorsAPI.jsx # Author CRUD (CREATE, READ, UPDATE, DELETE)
 │   ├── public/index.jsx           # Homepage
 │   └── about.jsx                  # About page
 ├── assets/
@@ -127,12 +165,18 @@ http://127.0.0.1:8000/api
 ### Endpoints yang Digunakan
 
 **Genre:**
-- `GET /api/genres` - Get all genres
-- `POST /api/genres` - Create new genre
+- `GET /api/genres` - Get all genres (Tugas 1 & 2)
+- `POST /api/genres` - Create new genre (Tugas 1)
+- `GET /api/genres/{id}` - Get genre by ID (Tugas 2)
+- `PUT /api/genres/{id}` - Update genre (Tugas 2)
+- `DELETE /api/genres/{id}` - Delete genre (Tugas 2)
 
 **Author:**
-- `GET /api/authors` - Get all authors
-- `POST /api/authors` - Create new author
+- `GET /api/authors` - Get all authors (Tugas 1 & 2)
+- `POST /api/authors` - Create new author (Tugas 1)
+- `GET /api/authors/{id}` - Get author by ID (Tugas 2)
+- `PUT /api/authors/{id}` - Update author (Tugas 2)
+- `DELETE /api/authors/{id}` - Delete author (Tugas 2)
 
 ---
 

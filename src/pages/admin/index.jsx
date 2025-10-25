@@ -28,8 +28,7 @@ export default function Dashboard() {
                         <span className="text-4xl">🏷️</span>
                         <span className="text-xs font-semibold text-red-700 bg-red-50 px-3 py-1 rounded-full">GENRE</span>
                     </div>
-                    <h3 className="text-3xl font-bold text-gray-900 mb-1">24</h3>
-                    <p className="text-sm text-gray-600 mb-3">Total Genre Buku</p>
+                    <p className="text-sm text-gray-600 mb-3">Kelola Genre Buku</p>
                     <a href="/admin/genres" className="inline-flex items-center text-sm font-medium text-red-700 hover:text-red-800">
                         Kelola Genre →
                     </a>
@@ -40,8 +39,7 @@ export default function Dashboard() {
                         <span className="text-4xl">✍️</span>
                         <span className="text-xs font-semibold text-red-700 bg-red-50 px-3 py-1 rounded-full">AUTHOR</span>
                     </div>
-                    <h3 className="text-3xl font-bold text-gray-900 mb-1">89</h3>
-                    <p className="text-sm text-gray-600 mb-3">Total Penulis Buku</p>
+                    <p className="text-sm text-gray-600 mb-3">Kelola Penulis Buku</p>
                     <a href="/admin/authors" className="inline-flex items-center text-sm font-medium text-red-700 hover:text-red-800">
                         Kelola Penulis →
                     </a>
@@ -61,7 +59,7 @@ export default function Dashboard() {
                         <div className="text-3xl mr-3">📖</div>
                         <div>
                             <div className="font-semibold">Kelola Genre</div>
-                            <div className="text-xs opacity-90">Tambah dan lihat data genre</div>
+                            <div className="text-xs opacity-90">CRUD lengkap genre buku</div>
                         </div>
                     </a>
                     <a 
@@ -71,7 +69,7 @@ export default function Dashboard() {
                         <div className="text-3xl mr-3">✍️</div>
                         <div>
                             <div className="font-semibold">Kelola Penulis</div>
-                            <div className="text-xs opacity-90">Tambah dan lihat data penulis</div>
+                            <div className="text-xs opacity-90">CRUD lengkap data penulis</div>
                         </div>
                     </a>
                 </div>
@@ -83,10 +81,10 @@ export default function Dashboard() {
                     <span className="text-2xl mr-3">ℹ️</span>
                     <div>
                         <p className="text-sm text-red-800 font-semibold mb-1">
-                            Tugas ReactJS Lanjutan Pertemuan 1
+                            Tugas ReactJS Lanjutan Pertemuan 1 & 2
                         </p>
                         <p className="text-sm text-red-700">
-                            Sistem ini menyediakan fitur <strong>Read dan Create</strong> untuk data Genre dan Author. 
+                            Sistem ini menyediakan fitur <strong>CRUD lengkap (Create, Read, Update, Delete)</strong> untuk data Genre dan Author. 
                             Silakan gunakan menu di sidebar atau quick actions di atas untuk mengelola data.
                         </p>
                     </div>

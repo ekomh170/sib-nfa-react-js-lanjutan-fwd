@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Technical documentation (internal only)
+TECHNICAL_DOCUMENTATION.md
