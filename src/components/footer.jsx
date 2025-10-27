@@ -3,19 +3,22 @@
  * 
  * Footer untuk halaman publik dengan:
  * - Logo & tagline BookStore
- * - Navigation links: Home, Admin Panel, Tentang
+ * - Navigation links: Home, Admin Panel (jika login), Tentang
  * - Copyright & identitas mahasiswa
+ * - Dynamic auth-aware links
  * 
  * @author Eko Muchamad Haryono - 0110223079
  */
 
 import logo from "../assets/logo.svg";
+import { useAuth } from "../contexts/useAuth";
 
 export default function Footer() {
+  const { isAuthenticated, loading } = useAuth();
   return (
     <>
       <footer className="border-t-4 border-red-700 p-6 bg-linear-to-b from-gray-50 to-gray-100 md:p-8 lg:p-10">
-        <div className="mx-auto max-w-screen-xl text-center">
+        <div className="mx-auto max-w-7xl text-center">
           {/* Logo dan Tagline */}
           <div className="mb-6">
             <div className="flex items-center justify-center mb-3">
@@ -51,21 +54,25 @@ export default function Footer() {
             <li className="text-gray-300">|</li>
             <li>
               <a
-                href="/admin"
-                className="px-4 py-2 hover:text-red-700 hover:underline font-medium transition-colors"
-              >
-                Admin Panel
-              </a>
-            </li>
-            <li className="text-gray-300">|</li>
-            <li>
-              <a
                 href="/tentang"
                 className="px-4 py-2 hover:text-red-700 hover:underline font-medium transition-colors"
               >
                 Tentang
               </a>
             </li>
+            {!loading && isAuthenticated && (
+              <>
+                <li className="text-gray-300">|</li>
+                <li>
+                  <a
+                    href="/admin"
+                    className="px-4 py-2 hover:text-red-700 hover:underline font-medium transition-colors"
+                  >
+                    Admin Panel
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
 
           {/* Divider */}
