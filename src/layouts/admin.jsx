@@ -2,24 +2,35 @@
  * admin.jsx - Admin Layout Component
  * 
  * Layout untuk halaman admin dengan:
- * - Navbar sticky top (logo, search, avatar)
+ * - Navbar sticky top (logo, user info, logout)
  * - Sidebar kiri (menu: Home, Dashboard, Genres, Authors)
  * - Main content area (dengan Outlet untuk nested routes)
  * - Tema: Merah-putih Indonesia
+ * - Protected: hanya bisa diakses setelah login
  * 
  * Fitur Admin:
  * - Genre Management: CRUD lengkap (Create, Read, Update, Delete)
  * - Author Management: CRUD lengkap (Create, Read, Update, Delete)
  * - Dashboard: Statistik dan overview
+ * - User Info: Menampilkan info user yang login
+ * - Logout: Keluar dari sistem
  * 
  * @author Eko Muchamad Haryono - 0110223079
  */
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/useAuth";
 import logo from "../assets/logo.svg";
 import developer from "../assets/developer/profile_eko.jpg";
 
 export default function AdminLayout() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/', { replace: true });
+  };
   return (
     <>
       <div className="antialiased bg-white">
@@ -79,12 +90,50 @@ export default function AdminLayout() {
                 </div>
               </a>
             </div>
-            <div className="flex items-center lg:order-2">
+            <div className="flex items-center lg:order-2 gap-3">
+              {/* User Info - Desktop */}
+              <div className="hidden md:flex items-center gap-3 bg-red-800 px-4 py-2 rounded-lg">
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-white">
+                    {user?.name || 'Admin User'}
+                  </p>
+                  <p className="text-xs text-red-100">
+                    {user?.email || 'admin@bookstore.com'}
+                  </p>
+                </div>
+                <img
+                  className="w-10 h-10 rounded-full object-cover border-2 border-white"
+                  src={developer}
+                  alt={user?.name || 'Admin User'}
+                />
+              </div>
+
+              {/* Logout Button - Desktop */}
+              <button
+                onClick={handleLogout}
+                className="hidden md:flex items-center gap-2 bg-white text-red-700 px-4 py-2 rounded-lg font-semibold hover:bg-red-50 transition shadow-md"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                Keluar
+              </button>
+
+              {/* Mobile Menu Button */}
               <button
                 type="button"
                 data-drawer-toggle="drawer-navigation"
                 aria-controls="drawer-navigation"
-                className="p-2 mr-1 text-white rounded-lg md:hidden hover:bg-red-800 focus:ring-4 focus:ring-red-300"
+                className="p-2 text-white rounded-lg md:hidden hover:bg-red-800 focus:ring-4 focus:ring-red-300"
               >
                 <span className="sr-only">Toggle search</span>
                 <svg
@@ -102,44 +151,60 @@ export default function AdminLayout() {
                 </svg>
               </button>
 
+              {/* Mobile User Avatar */}
               <button
                 type="button"
-                className="flex mx-3 text-sm bg-white rounded-full md:mr-0 focus:ring-4 focus:ring-red-300 border-2 border-white"
-                id="user-menu-button"
+                className="flex md:hidden text-sm bg-white rounded-full focus:ring-4 focus:ring-red-300 border-2 border-white"
+                id="user-menu-button-mobile"
                 aria-expanded="false"
-                data-dropdown-toggle="dropdown"
+                data-dropdown-toggle="dropdown-mobile"
               >
                 <span className="sr-only">Open user menu</span>
                 <img
                   className="w-8 h-8 rounded-full object-cover"
                   src={developer}
-                  alt="Eko Muchamad Haryono"
+                  alt={user?.name || 'Admin User'}
                 />
               </button>
-              {/* <!-- Dropdown menu --> */}
+
+              {/* Mobile Dropdown */}
               <div
-                className="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow rounded-xl"
-                id="dropdown"
+                className="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow-lg rounded-xl"
+                id="dropdown-mobile"
               >
-                <div className="py-3 px-4">
+                <div className="py-3 px-4 bg-red-50">
                   <span className="block text-sm font-semibold text-gray-900">
-                    Eko Muchamad Haryono
+                    {user?.name || 'Admin User'}
                   </span>
-                  <span className="block text-sm text-gray-900 truncate">
-                    0110223079@student.ac.id
+                  <span className="block text-sm text-gray-600 truncate">
+                    {user?.email || 'admin@bookstore.com'}
                   </span>
+                  {user?.username && (
+                    <span className="block text-xs text-gray-500 mt-1">
+                      @{user.username}
+                    </span>
+                  )}
                 </div>
-                <ul
-                  className="py-1 text-gray-700"
-                  aria-labelledby="dropdown"
-                >
+                <ul className="py-1" aria-labelledby="dropdown-mobile">
                   <li>
-                    <a
-                      href="#"
-                      className="block py-2 px-4 text-sm hover:bg-red-50 hover:text-red-700"
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left flex items-center gap-2 py-2 px-4 text-sm text-gray-700 hover:bg-red-50 hover:text-red-700 transition"
                     >
-                      Sign out
-                    </a>
+                      <svg
+                        className="w-4 h-4"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      Keluar
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -154,8 +219,33 @@ export default function AdminLayout() {
           aria-label="Sidenav"
           id="drawer-navigation"
         >
-          <div className="overflow-y-auto py-5 px-3 h-full bg-white">
-            <ul className="space-y-2">
+          <div className="overflow-y-auto py-5 px-3 h-full bg-white flex flex-col">
+            {/* User Profile Section - Sidebar */}
+            <div className="mb-4 p-4 bg-red-50 rounded-lg border border-red-200">
+              <div className="flex items-center gap-3">
+                <img
+                  className="w-12 h-12 rounded-full object-cover border-2 border-red-700"
+                  src={developer}
+                  alt={user?.name || 'Admin User'}
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 truncate">
+                    {user?.name || 'Admin User'}
+                  </p>
+                  <p className="text-xs text-gray-600 truncate">
+                    {user?.email || 'admin@bookstore.com'}
+                  </p>
+                  {user?.role && (
+                    <span className="inline-block mt-1 px-2 py-0.5 text-xs font-medium bg-red-700 text-white rounded">
+                      {user.role === 'admin' ? 'Administrator' : 'User'}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Navigation Menu */}
+            <ul className="space-y-2 flex-1">
               <li>
                 <a
                   href="/"
@@ -170,7 +260,7 @@ export default function AdminLayout() {
                   >
                     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
                   </svg>
-                  <span className="ml-3">Home</span>
+                  <span className="ml-3">Beranda</span>
                 </a>
               </li>
               <li>
@@ -188,7 +278,7 @@ export default function AdminLayout() {
                     <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                     <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                   </svg>
-                  <span className="ml-3">Dashboard</span>
+                  <span className="ml-3">Dasbor</span>
                 </a>
               </li>
               <li>
@@ -210,7 +300,7 @@ export default function AdminLayout() {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                  <span className="ml-3">Genres</span>
+                  <span className="ml-3">Genre Buku</span>
                 </a>
               </li>
               <li>
@@ -231,10 +321,32 @@ export default function AdminLayout() {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                  <span className="ml-3">Authors</span>
+                  <span className="ml-3">Penulis</span>
                 </a>
               </li>
             </ul>
+
+            {/* Logout Button - Sidebar (Mobile) */}
+            <div className="mt-4 md:hidden border-t pt-4">
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center justify-center gap-2 p-3 bg-red-700 text-white font-semibold rounded-lg hover:bg-red-800 transition shadow-md"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                Keluar
+              </button>
+            </div>
           </div>
         </aside>
 
