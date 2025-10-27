@@ -47,17 +47,23 @@ export default function About() {
                         </h2>
                         <p className="text-white leading-relaxed mb-4">
                             <strong>BookStore</strong> adalah aplikasi web berbasis ReactJS yang dikembangkan untuk 
-                            memenuhi tugas <strong>ReactJS Lanjutan Pertemuan 1 & 2</strong> dengan fokus pada implementasi 
-                            CRUD (Create, Read, Update, Delete) <strong>lengkap</strong> untuk data Genre dan Author.
+                            memenuhi tugas <strong>ReactJS Lanjutan</strong> dengan fokus pada implementasi 
+                            CRUD (Create, Read, Update, Delete) <strong>lengkap</strong> untuk manajemen data 
+                            Genre, Author, dan sistem autentikasi pengguna.
                         </p>
                         <p className="text-white leading-relaxed mb-4">
                             <strong>Tugas 1 (Pertemuan 1):</strong> Implementasi fitur READ dan CREATE untuk Genre dan Author 
                             dengan integrasi Laravel API.
                         </p>
-                        <p className="text-white leading-relaxed">
+                        <p className="text-white leading-relaxed mb-4">
                             <strong>Tugas 2 (Pertemuan 2):</strong> Implementasi fitur UPDATE dan DELETE dengan modal edit 
-                            dan confirmation dialog. Aplikasi ini dibangun menggunakan teknologi modern seperti React 19, 
-                            Vite, Tailwind CSS, dan terintegrasi dengan backend Laravel API untuk manajemen data yang efisien.
+                            dan confirmation dialog untuk Genre dan Author.
+                        </p>
+                        <p className="text-white leading-relaxed">
+                            <strong>Tugas 3 (Pertemuan 3):</strong> Implementasi sistem autentikasi lengkap dengan fitur 
+                            Login dan Registrasi Pengguna, protected routes, dan session management. Aplikasi ini dibangun 
+                            menggunakan teknologi modern seperti React 19, Vite, Tailwind CSS, dan terintegrasi dengan 
+                            backend Laravel API untuk manajemen data yang efisien dan aman.
                         </p>
                     </div>
 
@@ -68,13 +74,24 @@ export default function About() {
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="p-4 bg-red-800 rounded-lg border border-white">
+                                <div className="text-3xl mb-2">�</div>
+                                <h3 className="font-semibold text-white mb-2">Autentikasi Pengguna</h3>
+                                <ul className="text-sm text-white space-y-1">
+                                    <li>✓ Login & Logout</li>
+                                    <li>✓ Registrasi user baru</li>
+                                    <li>✓ Protected routes</li>
+                                    <li>✓ Session management</li>
+                                    <li>✓ User profile display</li>
+                                </ul>
+                            </div>
+                            <div className="p-4 bg-red-800 rounded-lg border border-white">
                                 <div className="text-3xl mb-2">📖</div>
                                 <h3 className="font-semibold text-white mb-2">Manajemen Genre</h3>
                                 <ul className="text-sm text-white space-y-1">
                                     <li>✓ Lihat daftar genre buku</li>
                                     <li>✓ Tambah genre baru</li>
-                                    <li>✓ Edit genre (Tugas 2)</li>
-                                    <li>✓ Hapus genre (Tugas 2)</li>
+                                    <li>✓ Edit genre</li>
+                                    <li>✓ Hapus genre</li>
                                     <li>✓ Slug otomatis</li>
                                 </ul>
                             </div>
@@ -84,8 +101,8 @@ export default function About() {
                                 <ul className="text-sm text-white space-y-1">
                                     <li>✓ Lihat daftar penulis</li>
                                     <li>✓ Tambah penulis baru</li>
-                                    <li>✓ Edit penulis (Tugas 2)</li>
-                                    <li>✓ Hapus penulis (Tugas 2)</li>
+                                    <li>✓ Edit penulis</li>
+                                    <li>✓ Hapus penulis</li>
                                     <li>✓ Data lengkap penulis</li>
                                 </ul>
                             </div>
@@ -95,20 +112,9 @@ export default function About() {
                                 <ul className="text-sm text-white space-y-1">
                                     <li>✓ Tema Merah-Putih Indonesia</li>
                                     <li>✓ Responsive Design</li>
-                                    <li>✓ Modal Edit Form</li>
-                                    <li>✓ Confirmation Dialog</li>
-                                    <li>✓ User-friendly Interface</li>
-                                </ul>
-                            </div>
-                            <div className="p-4 bg-red-800 rounded-lg border border-white">
-                                <div className="text-3xl mb-2">🔌</div>
-                                <h3 className="font-semibold text-white mb-2">API Integration</h3>
-                                <ul className="text-sm text-white space-y-1">
-                                    <li>✓ Laravel Backend API</li>
-                                    <li>✓ Axios HTTP Client</li>
-                                    <li>✓ RESTful CRUD Lengkap</li>
-                                    <li>✓ Error Handling</li>
                                     <li>✓ Loading States</li>
+                                    <li>✓ Auth-aware UI</li>
+                                    <li>✓ User-friendly Interface</li>
                                 </ul>
                             </div>
                         </div>
@@ -193,10 +199,11 @@ export default function About() {
                                 </div>
                                 <div className="mb-4">
                                     <div className="text-sm text-red-100 mb-1">Tugas</div>
-                                    <div className="text-lg font-semibold">ReactJS Lanjutan - Pertemuan 1 & 2</div>
+                                    <div className="text-lg font-semibold">ReactJS Lanjutan - Pertemuan 1, 2 & 3</div>
                                     <div className="text-sm text-red-100 mt-1">
                                         • Tugas 1: READ & CREATE<br/>
-                                        • Tugas 2: UPDATE & DELETE
+                                        • Tugas 2: UPDATE & DELETE<br/>
+                                        • Tugas 3: LOGIN & REGISTER
                                     </div>
                                 </div>
                             </div>

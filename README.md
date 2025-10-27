@@ -95,6 +95,92 @@ Repository ini berisi tugas-tugas React JS Lanjutan yang dikerjakan selama mengi
 
 ---
 
+### 🎯 Tugas 3: React JS Lanjutan - Pertemuan 3
+- **Branch**: `tugas3-reactjs-lanjutan-eko`
+- **GitHub Link**: [https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas3-reactjs-lanjutan-eko](https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas3-reactjs-lanjutan-eko)
+- **Backend API**: [https://github.com/ekomh170/booksales-api-laravel](https://github.com/ekomh170/booksales-api-laravel)
+- **Status**: 🔄 DALAM PENGERJAAN
+- **Deadline**: TBA
+- **Teknologi**: React 19.1.1, Vite 7.1.7, Tailwind CSS 4.1.15, Axios, React Router v7.9.4
+- **Deskripsi**:
+  - Buatlah fitur **Registrasi Pengguna** dan **Login** sebagai bagian dari pengembangan aplikasi berbasis React JS.
+  - Implementasi sistem autentikasi lengkap dengan protected routes dan session management.
+  - Desain antarmuka (UI) sesuai kreativitas masing-masing.
+  - Pastikan tampilan responsif, menarik secara visual, dan mudah digunakan.
+  - Upload kode ke GitHub dengan repository **private** dan invite username mentor.
+  - Salin tautan repository dan tempelkan ke dalam file Microsoft Word.
+  - Unggah file Word tersebut ke LMS sesuai dengan jadwal yang ditentukan.
+
+### Fitur yang Dikerjakan:
+#### Sistem Autentikasi Lengkap
+- **Login**: 
+  - Form login dengan email dan password
+  - Validasi form (required fields, format email)
+  - Request POST ke `/api/login` dengan Laravel Backend
+  - Auto-fill credentials untuk development (removable untuk production)
+  - Success/Error notifications
+  - Redirect ke `/admin` setelah login berhasil
+  - Loading state dengan spinner animation
+
+- **Registrasi**: 
+  - Form registrasi lengkap (Nama Lengkap, Email, Username, Password, Password Confirmation)
+  - Validasi komprehensif:
+    - Semua field wajib diisi
+    - Format email valid (regex)
+    - Password minimal 6 karakter
+    - Password confirmation harus match
+  - Request POST ke `/api/register`
+  - Auto role assignment (user/admin)
+  - Success notification dengan auto-redirect ke login
+  - Real-time validation feedback
+
+- **Session Management**:
+  - AuthContext & AuthProvider (Context API)
+  - Token storage di localStorage
+  - Auto-check authentication saat page load
+  - useAuth custom hook untuk akses auth state
+  - Loading state untuk prevent UI flash
+
+- **Protected Routes**:
+  - Admin routes hanya bisa diakses setelah login
+  - Auto-redirect ke login jika belum authenticated
+  - Navbar dynamic berdasarkan auth status
+
+- **Logout**:
+  - Request POST ke `/api/logout`
+  - Clear token dari localStorage
+  - Clear user state
+  - Redirect ke homepage
+- **Field Input**: 
+  - Nama Lengkap (required)
+  - Email (required, valid format)
+  - Username (required)
+  - Password (required, min 6 chars)
+  - Password Confirmation (required, must match)
+  - Role (hidden field, default: "user")
+  
+- **Validasi Real-time**: 
+  - Client-side validation sebelum submit
+  - Error messages yang jelas
+  - Field highlighting untuk errors
+  - Helper text untuk password requirements
+
+- **API Integration**: 
+  - Request format sesuai Laravel backend
+  - Proper error handling
+  - Success/Error state management
+  - Auto-redirect setelah berhasil
+
+#### 🎨 Tema & Design
+- Tema Merah-Putih Indonesia 🇮🇩 (konsisten)
+- Card-based forms dengan shadow & border
+- SVG icons (no emoji for accessibility)
+- Smooth hover effects & transitions
+- Responsive grid layouts
+- Clean typography hierarchy
+
+---
+
 ## 🚀 Cara Menjalankan Project
 
 ### Prerequisites
@@ -119,6 +205,7 @@ Aplikasi akan berjalan di: **http://localhost:5173**
 - Genres: `http://localhost:5173/admin/genres`
 - Authors: `http://localhost:5173/admin/authors`
 - About: `http://localhost:5173/tentang`
+- **Register**: `http://localhost:5173/register` ✨ (Tugas 3)
 
 ---
 
@@ -130,9 +217,10 @@ src/
 │   └── axios.js                   # Axios instance dengan interceptors
 ├── services/
 │   ├── genreService.js            # Genre API calls (CRUD lengkap)
-│   └── authorService.js           # Author API calls (CRUD lengkap)
+│   ├── authorService.js           # Author API calls (CRUD lengkap)
+│   └── authService.js             # Authentication service (Login, Register)
 ├── components/
-│   ├── navbar.jsx                 # Navbar komponen
+│   ├── navbar.jsx                 # Navbar komponen (+ link Register)
 │   ├── footer.jsx                 # Footer komponen
 │   ├── hero.jsx                   # Hero section
 │   └── testimonial.jsx            # Testimonial section
@@ -145,11 +233,13 @@ src/
 │   │   ├── genres/genresAPI.jsx   # Genre CRUD (CREATE, READ, UPDATE, DELETE)
 │   │   └── authors/authorsAPI.jsx # Author CRUD (CREATE, READ, UPDATE, DELETE)
 │   ├── public/index.jsx           # Homepage
-│   └── about.jsx                  # About page
+│   ├── about.jsx                  # About page
+│   └── register/
+│       └── Register.jsx           # ✨ Register page (Tugas 3)
 ├── assets/
 │   ├── logo.svg                   # BookStore logo
 │   └── developer/profile_eko.jpg  # Developer photo
-├── App.jsx                        # Router configuration
+├── App.jsx                        # Router configuration (+ route /register)
 └── main.jsx                       # Entry point
 ```
 
@@ -163,6 +253,12 @@ http://127.0.0.1:8000/api
 ```
 
 ### Endpoints yang Digunakan
+
+**Authentication:**
+- `POST /api/register` - Register user baru (Tugas 3) ✨
+- `POST /api/login` - Login user
+- `POST /api/logout` - Logout user
+- `GET /api/me` - Get authenticated user info
 
 **Genre:**
 - `GET /api/genres` - Get all genres (Tugas 1 & 2)
