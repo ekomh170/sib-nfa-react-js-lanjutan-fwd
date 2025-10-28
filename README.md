@@ -99,7 +99,7 @@ Repository ini berisi tugas-tugas React JS Lanjutan yang dikerjakan selama mengi
 - **Branch**: `tugas3-reactjs-lanjutan-eko`
 - **GitHub Link**: [https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas3-reactjs-lanjutan-eko](https://github.com/ekomh170/sib-nfa-react-js-lanjutan-fwd/tree/tugas3-reactjs-lanjutan-eko)
 - **Backend API**: [https://github.com/ekomh170/booksales-api-laravel](https://github.com/ekomh170/booksales-api-laravel)
-- **Status**: 🔄 DALAM PENGERJAAN
+- **Status**: ✅ SUDAH SUBMIT
 - **Deadline**: TBA
 - **Teknologi**: React 19.1.1, Vite 7.1.7, Tailwind CSS 4.1.15, Axios, React Router v7.9.4
 - **Deskripsi**:
@@ -201,11 +201,15 @@ Aplikasi akan berjalan di: **http://localhost:5173**
 
 ### Akses Halaman
 - Homepage: `http://localhost:5173/`
-- Admin Dashboard: `http://localhost:5173/admin`
-- Genres: `http://localhost:5173/admin/genres`
-- Authors: `http://localhost:5173/admin/authors`
+- Admin Dashboard: `http://localhost:5173/admin` 🔒 (Admin only)
+- Genres (Admin): `http://localhost:5173/admin/genres` 🔒 (Admin only)
+- Authors (Admin): `http://localhost:5173/admin/authors` 🔒 (Admin only)
+- **Genres (User View)**: `http://localhost:5173/genres` ✨ (Read-only)
+- **Authors (User View)**: `http://localhost:5173/authors` ✨ (Read-only)
+- **Profile**: `http://localhost:5173/profile` ✨ (All authenticated)
 - About: `http://localhost:5173/tentang`
-- **Register**: `http://localhost:5173/register` ✨ (Tugas 3)
+- Login: `http://localhost:5173/login`
+- Register: `http://localhost:5173/register`
 
 ---
 
@@ -220,22 +224,27 @@ src/
 │   ├── authorService.js           # Author API calls (CRUD lengkap)
 │   └── authService.js             # Authentication service (Login, Register)
 ├── components/
-│   ├── navbar.jsx                 # Navbar komponen (+ link Register)
+│   ├── navbar.jsx                 # Navbar komponen (role-aware) ✨
 │   ├── footer.jsx                 # Footer komponen
-│   ├── hero.jsx                   # Hero section
-│   └── testimonial.jsx            # Testimonial section
+│   ├── hero.jsx                   # Hero section (role-aware buttons) ✨
+│   ├── testimonial.jsx            # Testimonial section
+│   └── ProtectedRoute.jsx         # Protected route dengan role validation ✨
 ├── layouts/
 │   ├── admin.jsx                  # Admin layout dengan sidebar
 │   └── public.jsx                 # Public layout wrapper
 ├── pages/
 │   ├── admin/
-│   │   ├── index.jsx              # Dashboard admin
-│   │   ├── genres/genresAPI.jsx   # Genre CRUD (CREATE, READ, UPDATE, DELETE)
-│   │   └── authors/authorsAPI.jsx # Author CRUD (CREATE, READ, UPDATE, DELETE)
+│   │   ├── index.jsx              # Dashboard admin (Admin only) 🔒
+│   │   ├── genres/genresAPI.jsx   # Genre CRUD (Admin only) 🔒
+│   │   └── authors/authorsAPI.jsx # Author CRUD (Admin only) 🔒
+│   ├── user/
+│   │   ├── genres/GenresView.jsx  # View genres (User read-only) ✨
+│   │   └── authors/AuthorsView.jsx # View authors (User read-only) ✨
 │   ├── public/index.jsx           # Homepage
 │   ├── about.jsx                  # About page
-│   └── register/
-│       └── Register.jsx           # ✨ Register page (Tugas 3)
+│   ├── login/Login.jsx            # Login page
+│   ├── register/Register.jsx      # Register page
+│   └── profile/Profile.jsx        # User Profile (All authenticated) ✨
 ├── assets/
 │   ├── logo.svg                   # BookStore logo
 │   └── developer/profile_eko.jpg  # Developer photo
@@ -272,7 +281,29 @@ http://127.0.0.1:8000/api
 - `POST /api/authors` - Create new author (Tugas 1)
 - `GET /api/authors/{id}` - Get author by ID (Tugas 2)
 - `PUT /api/authors/{id}` - Update author (Tugas 2)
-- `DELETE /api/authors/{id}` - Delete author (Tugas 2)
+- **DELETE /api/authors/{id}** - Delete author (Tugas 2)
+
+---
+
+### 🎯 Tugas 4: React JS Lanjutan - Pertemuan 4
+- **Branch**: `tugas4-reactjs-lanjutan-eko`
+- **Status**: 🔄 DALAM PENGERJAAN
+- **Deadline**: Kamis, 30 Oktober 2025, 23:59 WIB
+
+**Fitur Role-Based Access Control:**
+- ✅ Protected Route dengan role validation (admin/user)
+- ✅ User Profile page (accessible by all authenticated users)
+- ✅ Admin-only pages (/admin, /admin/genres, /admin/authors)
+- ✅ Custom Access Denied page
+- ✅ Role-aware navbar & hero buttons
+- ✅ Role badges dengan color coding
+- ✅ **View-Only Pages for Users** (Read-Only Access):
+  - ✅ GenresView.jsx - User dapat melihat semua genre (tidak bisa edit/delete)
+  - ✅ AuthorsView.jsx - User dapat melihat semua author (tidak bisa edit/delete)
+  - ✅ Search & Filter functionality
+  - ✅ Card-based layout dengan responsive design
+  - ✅ Read-only badge indicator
+  - ✅ Info box untuk notifikasi read-only access
 
 ---
 
