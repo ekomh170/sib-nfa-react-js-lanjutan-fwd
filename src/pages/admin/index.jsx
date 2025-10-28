@@ -81,10 +81,11 @@ export default function Dashboard() {
                     <span className="text-2xl mr-3">ℹ️</span>
                     <div>
                         <p className="text-sm text-red-800 font-semibold mb-1">
-                            Tugas ReactJS Lanjutan Pertemuan 1 & 2
+                            Tugas ReactJS Lanjutan Pertemuan 1, 2, 3 & 4
                         </p>
                         <p className="text-sm text-red-700">
-                            Sistem ini menyediakan fitur <strong>CRUD lengkap (Create, Read, Update, Delete)</strong> untuk data Genre dan Author. 
+                            Sistem ini menyediakan fitur <strong>CRUD lengkap (Create, Read, Update, Delete)</strong> untuk data Genre dan Author 
+                            dengan <strong>Role-Based Access Control</strong>. Admin memiliki akses penuh, sementara User biasa hanya dapat melihat data. 
                             Silakan gunakan menu di sidebar atau quick actions di atas untuk mengelola data.
                         </p>
                     </div>

@@ -59,11 +59,16 @@ export default function About() {
                             <strong>Tugas 2 (Pertemuan 2):</strong> Implementasi fitur UPDATE dan DELETE dengan modal edit 
                             dan confirmation dialog untuk Genre dan Author.
                         </p>
-                        <p className="text-white leading-relaxed">
+                        <p className="text-white leading-relaxed mb-4">
                             <strong>Tugas 3 (Pertemuan 3):</strong> Implementasi sistem autentikasi lengkap dengan fitur 
-                            Login dan Registrasi Pengguna, protected routes, dan session management. Aplikasi ini dibangun 
-                            menggunakan teknologi modern seperti React 19, Vite, Tailwind CSS, dan terintegrasi dengan 
-                            backend Laravel API untuk manajemen data yang efisien dan aman.
+                            Login dan Registrasi Pengguna, protected routes, dan session management.
+                        </p>
+                        <p className="text-white leading-relaxed">
+                            <strong>Tugas 4 (Pertemuan 4):</strong> Implementasi Role-Based Access Control (RBAC) dengan 
+                            pembagian hak akses antara Admin dan User biasa. Admin memiliki full CRUD access, sementara 
+                            User biasa hanya dapat melihat data (read-only). Aplikasi ini dibangun menggunakan teknologi 
+                            modern seperti React 19, Vite, Tailwind CSS, dan terintegrasi dengan backend Laravel API untuk 
+                            manajemen data yang efisien dan aman.
                         </p>
                     </div>
 
@@ -199,11 +204,12 @@ export default function About() {
                                 </div>
                                 <div className="mb-4">
                                     <div className="text-sm text-red-100 mb-1">Tugas</div>
-                                    <div className="text-lg font-semibold">ReactJS Lanjutan - Pertemuan 1, 2 & 3</div>
+                                    <div className="text-lg font-semibold">ReactJS Lanjutan - Pertemuan 1, 2, 3 & 4</div>
                                     <div className="text-sm text-red-100 mt-1">
                                         • Tugas 1: READ & CREATE<br/>
                                         • Tugas 2: UPDATE & DELETE<br/>
-                                        • Tugas 3: LOGIN & REGISTER
+                                        • Tugas 3: LOGIN & REGISTER<br/>
+                                        • Tugas 4: ROLE-BASED ACCESS CONTROL
                                     </div>
                                 </div>
                             </div>
