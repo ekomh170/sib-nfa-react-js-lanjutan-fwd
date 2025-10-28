@@ -35,7 +35,12 @@ import About from './pages/about'
 import Login from './pages/login/Login'
 import Register from './pages/register/Register'
 
-// Admin Pages
+// User Pages (All authenticated users)
+import Profile from './pages/profile/Profile'
+import GenresView from './pages/user/genres/GenresView'
+import AuthorsView from './pages/user/authors/AuthorsView'
+
+// Admin Pages (Admin only)
 import Dashboard from './pages/admin/index'
 import GenresAPI from './pages/admin/genres/genresAPI'
 import AuthorsAPI from './pages/admin/authors/authorsAPI'
@@ -49,15 +54,34 @@ function App() {
           <Route path="/" element={<PublicLayout />}>
             <Route index element={<Home />} />
             <Route path="tentang" element={<About />} />
+            
+            {/* View-Only Routes - User biasa bisa lihat data (Read-Only) - dengan navbar */}
+            <Route path="genres" element={
+              <ProtectedRoute>
+                <GenresView />
+              </ProtectedRoute>
+            } />
+            <Route path="authors" element={
+              <ProtectedRoute>
+                <AuthorsView />
+              </ProtectedRoute>
+            } />
           </Route>
 
           {/* Auth Routes - Login & Register */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Admin Routes - Protected (perlu login) */}
-          <Route path="/admin" element={
+          {/* User Routes - Protected (semua user yang login bisa akses) */}
+          <Route path="/profile" element={
             <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+
+          {/* Admin Routes - Protected & Admin Only */}
+          <Route path="/admin" element={
+            <ProtectedRoute requiredRole="admin">
               <AdminLayout />
             </ProtectedRoute>
           }>
