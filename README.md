@@ -287,7 +287,7 @@ http://127.0.0.1:8000/api
 
 ### 🎯 Tugas 4: React JS Lanjutan - Pertemuan 4
 - **Branch**: `tugas4-reactjs-lanjutan-eko`
-- **Status**: 🔄 DALAM PENGERJAAN
+- **Status**: ✅ SUDAH SUBMIT
 - **Deadline**: Kamis, 30 Oktober 2025, 23:59 WIB
 
 **Fitur Role-Based Access Control:**
