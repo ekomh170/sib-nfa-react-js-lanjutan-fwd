@@ -14,7 +14,8 @@ import logo from "../assets/logo.svg";
 import { useAuth } from "../contexts/useAuth";
 
 export default function Footer() {
-  const { isAuthenticated, loading } = useAuth();
+  const { user, isAuthenticated, loading } = useAuth();
+  
   return (
     <>
       <footer className="border-t-4 border-red-700 p-6 bg-linear-to-b from-gray-50 to-gray-100 md:p-8 lg:p-10">
@@ -65,12 +66,43 @@ export default function Footer() {
                 <li className="text-gray-300">|</li>
                 <li>
                   <a
-                    href="/admin"
+                    href="/genres"
                     className="px-4 py-2 hover:text-red-700 hover:underline font-medium transition-colors"
                   >
-                    Admin Panel
+                    Genre
                   </a>
                 </li>
+                <li className="text-gray-300">|</li>
+                <li>
+                  <a
+                    href="/authors"
+                    className="px-4 py-2 hover:text-red-700 hover:underline font-medium transition-colors"
+                  >
+                    Penulis
+                  </a>
+                </li>
+                <li className="text-gray-300">|</li>
+                <li>
+                  <a
+                    href="/profile"
+                    className="px-4 py-2 hover:text-red-700 hover:underline font-medium transition-colors"
+                  >
+                    Profil
+                  </a>
+                </li>
+                {user?.role === 'admin' && (
+                  <>
+                    <li className="text-gray-300">|</li>
+                    <li>
+                      <a
+                        href="/admin"
+                        className="px-4 py-2 hover:text-red-700 hover:underline font-medium transition-colors"
+                      >
+                        Admin Panel
+                      </a>
+                    </li>
+                  </>
+                )}
               </>
             )}
           </ul>
@@ -81,13 +113,16 @@ export default function Footer() {
           {/* Copyright */}
           <div className="text-sm text-gray-600">
             <p className="mb-2">
-              © <span className="font-bold text-red-700">2025</span>. All Rights Reserved.
+              © <span className="font-bold text-red-700">2025 BookStore</span>. All Rights Reserved.
             </p>
             <p className="text-xs text-gray-500">
-              Dikembangkan dengan ❤️ oleh <span className="font-semibold">Eko Muchamad Haryono</span>
+              Dikembangkan dengan ❤️ dan tema 🇮🇩 oleh <span className="font-semibold">Eko Muchamad Haryono</span>
             </p>
             <p className="text-xs text-gray-400 mt-1">
-              NIM: 0110223079 | Teknik Informatika - Software Engineering
+              NIM: 0110223079 | SIB Fullstack Web Developer (NFA) - Batch 2025
+            </p>
+            <p className="text-xs text-gray-400 mt-1">
+              Tugas ReactJS Lanjutan Pertemuan 4 - Role-Based Access Control
             </p>
           </div>
         </div>

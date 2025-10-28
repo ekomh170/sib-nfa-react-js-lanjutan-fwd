@@ -15,7 +15,7 @@
 import { useAuth } from "../contexts/useAuth";
 
 export default function Hero() {
-  const { isAuthenticated, loading } = useAuth();
+  const { user, isAuthenticated, loading } = useAuth();
   return (
     <>
       <section className="bg-linear-to-b from-red-600 via-red-500 to-white">
@@ -54,31 +54,63 @@ export default function Hero() {
           
           {/* CTA Buttons */}
           <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4 mb-8">
-            <a
-              href="/login"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-red-700 bg-white rounded-lg hover:bg-red-50 focus:ring-4 focus:ring-red-300 shadow-lg transition-all"
-            >
-              Jelajahi Koleksi
-              <svg
-                className="ml-2 -mr-1 w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </a>
-            {!loading && isAuthenticated && (
-              <a
-                href="/admin"
-                className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white bg-red-900 rounded-lg hover:bg-red-950 focus:ring-4 focus:ring-red-300 shadow-lg transition-all"
-              >
-                Panel Admin
-              </a>
+            {loading ? (
+              // Loading skeleton for buttons
+              <>
+                <div className="h-12 w-48 bg-white/30 rounded-lg animate-pulse"></div>
+                <div className="h-12 w-40 bg-white/30 rounded-lg animate-pulse"></div>
+              </>
+            ) : isAuthenticated ? (
+              <>
+                <a
+                  href="/profile"
+                  className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-red-700 bg-white rounded-lg hover:bg-red-50 focus:ring-4 focus:ring-red-300 shadow-lg transition-all"
+                >
+                  <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Profil Saya
+                </a>
+                {user?.role === 'admin' && (
+                  <a
+                    href="/admin"
+                    className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white bg-red-900 rounded-lg hover:bg-red-950 focus:ring-4 focus:ring-red-300 shadow-lg transition-all"
+                  >
+                    <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Panel Admin
+                  </a>
+                )}
+              </>
+            ) : (
+              <>
+                <a
+                  href="/login"
+                  className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-red-700 bg-white rounded-lg hover:bg-red-50 focus:ring-4 focus:ring-red-300 shadow-lg transition-all"
+                >
+                  Jelajahi Koleksi
+                  <svg
+                    className="ml-2 -mr-1 w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                </a>
+                <a
+                  href="/register"
+                  className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white bg-red-900 rounded-lg hover:bg-red-950 focus:ring-4 focus:ring-red-300 shadow-lg transition-all"
+                >
+                  Daftar Sekarang
+                </a>
+              </>
             )}
           </div>
           
